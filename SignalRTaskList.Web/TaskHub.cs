@@ -13,9 +13,6 @@ namespace SignalRTaskList.Data
         private string _connectionString;
         private static int _count;
 
-        public object Clients { get; private set; }
-        public object Context { get; private set; }
-
         public TaskHub(IConfiguration configuration)
         {
             //_connectionString = configuration.GetConnectionString("ConStr");
@@ -28,9 +25,9 @@ namespace SignalRTaskList.Data
 
         public void NewUser()
         {
-            User u = new User();
-            u = Context.User.Identity.Name;
-            Clients.All.SendAsync("NewUsers", u);
+            
+            string email  = Context.User.Identity.Name;
+            Clients.All.SendAsync("NewUsers", email);
         }
     }
 }

@@ -5,6 +5,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
+using SignalRTaskList.Data;
 using SignalRTaskList.Web.Models;
 
 namespace SignalRTaskList.Web.Controllers
@@ -12,15 +14,24 @@ namespace SignalRTaskList.Web.Controllers
     [Authorize]
     public class HomeController : Controller
     {
-        public IActionResult Index()
+        private string _connectionString;
+
+        public HomeController(IConfiguration configuration)
         {
-            return View();
+            _connectionString = configuration.GetConnectionString("ConStr");
         }
 
-        public IActionResult About()
+        public IActionResult Index()
         {
-            ViewData["Message"] = "Your application description page.";
+            TaskManager mgr = new TaskManager(_connectionString);
+            var t = mgr.GetTasks();
+            return View(t);
+        }
 
+        public IActionResult AddTask(Chore c)
+        {
+            TaskManager mgr = new TaskManager(_connectionString);
+            mgr.AddTask(c);
             return View();
         }
 
