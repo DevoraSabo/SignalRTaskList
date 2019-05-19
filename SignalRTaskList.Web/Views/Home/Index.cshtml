@@ -14,20 +14,20 @@
                 <th>Title</th>
                 <th>Status</th>
             </tr>
-            @foreach (var item in Model)
+            @foreach (var chore in Model)
             {
                 <tr>
-                    <td>@item.Title</td>
+                    <td id="chore-@chore.Id">@chore.Title</td>
                     <td>
-                        @if (item.Status == Status.NotStarted)
+                        @if (chore.Status == Status.NotStarted)
                         {
                             <button class="btn btn-danger" id="not-started">Just Do It!</button>
                         }
-                        else if (item.Status == Status.InProgress)
+                        else if (chore.Status == Status.InProgress)
                         {
-                            <button disabled class="btn btn-success" id="in-progress">@item.User.Name snatched this one</button>
+                            <button disabled class="btn btn-success" id="in-progress">@chore.User.Name snatched this one</button>
                         }
-                        @if (item.Status == Status.Done)
+                        @if (chore.Status == Status.Done)
                         {
                             <button disabled class="btn btn-warning" id="completed">Completed</button>
                         }

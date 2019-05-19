@@ -13,8 +13,16 @@ $(() => {
         connection.invoke("SendTask", { title });
     });
 
-    connection.on("NewTask", addTask => {
-        $("#task-table").append(`<h4>${chatMessage.name} says: ${chatMessage.message}</h4>`)
+    connection.on("NewTask", chore => {
+        $("#task-table").append(`<tr id="chore-${chore.Id}">
+                                     <td>${chore.title} <td/>
+                                     <td> <button class="btn btn-danger" data-id="${chore.Id}">I'm doing this one!</button><td/>
+                                <tr/> `)
+    });
+
+    $('#tasks').on('click', '.btn-info', function () {
+        const id = $(this).data('id');
+        connection.invoke("UpdateStatus", { id, status: 1 })
     });
     
 });
