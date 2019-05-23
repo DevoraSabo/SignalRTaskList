@@ -18,9 +18,21 @@ namespace SignalRTaskList.Data
             //_connectionString = configuration.GetConnectionString("ConStr");
         }
 
-        public void SendTask(Chore chore)
+        public void SendTask(string title)
         {
-            Clients.All.SendAsync("NewTask", chore);
+            TaskManager mgr = new TaskManager(_connectionString);
+            Chore c = new Chore();
+            c.Title = title;
+            c.Status = Status.NotStarted;
+
+            Clients.All.SendAsync("NewTask", c);
+
+        }
+
+        public void UpdateStatus(int id, Status status)
+        {
+            TaskManager mgr = new TaskManager(_connectionString);
+            
         }
 
         public void NewUser()

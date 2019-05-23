@@ -28,12 +28,12 @@ namespace SignalRTaskList.Web.Controllers
             return View(t);
         }
 
-        public IActionResult AddTask(Chore c)
-        {
-            //TaskManager mgr = new TaskManager(_connectionString); -- need to do all this code in the task hub plus with reference to add the user.
-            //mgr.AddTask(c);
-            //return View();
-        }
+        //public IActionResult AddTask(Chore c)
+        //{
+        //    //TaskManager mgr = new TaskManager(_connectionString); -- need to do all this code in the task hub plus with reference to add the user.
+        //    //mgr.AddTask(c);
+        //    //return View();
+        //}
 
         public IActionResult Contact()
         {

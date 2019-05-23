@@ -24,5 +24,7 @@ $(() => {
         const id = $(this).data('id');
         connection.invoke("UpdateStatus", { id, status: 1 })
     });
+
+   
     
 });
